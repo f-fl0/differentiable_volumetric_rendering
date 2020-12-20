@@ -1,0 +1,9 @@
+build
+Dockerfile
+environment.yaml
+.git
+.gitignore
+LICENSE
+Makefile
+out
+*.md
