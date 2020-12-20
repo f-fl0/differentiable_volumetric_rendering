@@ -40,9 +40,20 @@ You can do this via
 python setup.py build_ext --inplace
 ```
 
+Alternatively you can build a docker image using the prepared Dockerfile.
+
+First build the docker image
+```
+make
+```
+Then start a container in interactive mode
+```
+docker run -it --rm --mount "type=bind,src=$(pwd)/out,dst=/home/user/dvr/out" dvr:latest bash
+```
+
 ## Demo
 <div style="text-align: center">
-<img src="media/demo/choy_renderings/f32cfab76f75cbebc6ced373b157c8ba_input.jpg" width="220"/> 
+<img src="media/demo/choy_renderings/f32cfab76f75cbebc6ced373b157c8ba_input.jpg" width="220"/>
 <img src="media/single-view-reconstruction/ours-rgb/car2.gif" width="260"/>
 <img src="media/single-view-reconstruction/ours-depth/car2.gif" width="260"/>
 
@@ -61,7 +72,7 @@ Moreover, the script creates a `generation/vis` folder where both inputs and out
 ### Download Datasets
 
 To evaluate a pre-trained model or train a new model from scratch, you have to obtain the respective dataset.
-We use three different datasets in the DVR project: 
+We use three different datasets in the DVR project:
 <ol type="a">
 <li>ShapeNet for 2.5D supervised models (using the <a href="https://arxiv.org/abs/1604.00449">Choy et. al. renderings</a> as input and our renderings as supervision) </li>
 <li>ShapeNet for 2D supervised models (using the <a href="https://arxiv.org/abs/1711.07566">Kato et. al. renderings</a>)</li>
@@ -91,7 +102,7 @@ python generate.py CONFIG.yaml
 where you replace `CONFIG.yaml` with the correct config file.
 
 The easiest way is to use a pre-trained model.
-You can do this by using one of the config files which are indicated with `_pretrained.yaml`. 
+You can do this by using one of the config files which are indicated with `_pretrained.yaml`.
 
 For example, for our 2.5D supervised single-view reconstruction model run
 ```
@@ -120,9 +131,9 @@ training:
 to generate 3D models for the images in `media/my_images`. The models will be saved to `out/my_3d_models`.
 Similar to before, to start the generation process, run
 ```
-python generate.py configs/demo/demo_combined.yaml 
+python generate.py configs/demo/demo_combined.yaml
 ```
-*Note:* You can only expect our model to provide reasonable results on data which is similar to what it was trained on (white background, single object, etc.). 
+*Note:* You can only expect our model to provide reasonable results on data which is similar to what it was trained on (white background, single object, etc.).
 
 
 ### Evaluation
@@ -160,7 +171,7 @@ If you like the DVR project, please check out other works on implicit representi
 - [Oechsle et. al. - Learning Implicit Surface Light Fields (ArXiv 2020)](https://arxiv.org/abs/2003.12406)
 
 ## Other Relevant Works
-Also check out other exciting works on inferring implicit representations without 3D supervision: 
+Also check out other exciting works on inferring implicit representations without 3D supervision:
 - [Liu et. al. - Learning to Infer Implicit Surfaces without 3D Supervision (NeurIPS 2019)](https://arxiv.org/abs/1911.00767)
 - [Sitzmann et. al. - Scene Representation Networks: Continuous 3D-Structure-Aware Neural Scene Representations (NeurIPS 2019)](https://arxiv.org/abs/1906.01618)
 - [Liu. et. al. - DIST: Rendering Deep Implicit Signed Distance Function with Differentiable Sphere Tracing (CVPR 2020)](http://b1ueber2y.me/projects/DIST-Renderer)
